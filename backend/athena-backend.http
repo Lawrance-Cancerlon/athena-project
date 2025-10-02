@@ -1,0 +1,6 @@
+@athena_backend_HostAddress = http://localhost:5249
+
+GET {{athena_backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
