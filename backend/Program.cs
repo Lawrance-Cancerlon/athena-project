@@ -1,6 +1,15 @@
+using athena_backend.Configurations;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Configurations
+builder.Services.Configure<DatabaseConfiguration>(builder.Configuration.GetSection(nameof(DatabaseConfiguration)));
+builder.Services.AddSingleton(serviceProvider => serviceProvider.GetRequiredService<IOptions<DatabaseConfiguration>>().Value);
+
+builder.Services.Configure<JwtConfiguration>(builder.Configuration.GetSection(nameof(JwtConfiguration)));
+builder.Services.AddSingleton(serviceProvider => serviceProvider.GetRequiredService<IOptions<JwtConfiguration>>().Value);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
